@@ -12,12 +12,12 @@
 >
     {{-- Slide images --}}
     @foreach ($slides as $i => $image)
-        <img
-            src="{{ $image }}"
-            alt="Slide {{ $i + 1 }}"
-            class="slide absolute inset-0 size-full object-cover object-center"
-            style="{{ $i > 0 ? 'opacity: 0;' : '' }}"
-        >
+            <img
+                src="{{ $image }}"
+                alt="Slide {{ $i + 1 }}"
+                class="slide absolute inset-0 size-full object-cover object-center transition-all duration-700 ease-in-out"
+                style="{{ $i > 0 ? 'opacity: 0; transform: scale(1.05);' : '' }}"
+            >
     @endforeach
 
     {{-- Dark overlay --}}
@@ -77,7 +77,10 @@
             var cur = 0, t = s.length;
 
             function go(i) {
-                s.forEach(function(el, idx) { el.style.opacity = idx === i ? '1' : '0'; });
+                s.forEach(function(el, idx) {
+                    el.style.opacity = idx === i ? '1' : '0';
+                    el.style.transform = idx === i ? 'scale(1)' : 'scale(1.05)';
+                });
                 d.forEach(function(el, idx) {
                     el.className = 'size-2 rounded-full transition-all duration-300 ' + (idx === i ? 'bg-orange-accent w-6' : 'bg-white/30 hover:bg-white/50');
                 });
