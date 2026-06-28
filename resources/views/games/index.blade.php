@@ -22,7 +22,7 @@
             <tbody class="divide-y divide-gray-200">
                 @forelse ($games as $game)
                     <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-xl">{{ $game->icon }}</td>
+                        <td class="px-6 py-4"><img src="{{ asset('images/games/' . $game->icon) }}" alt="{{ $game->name }}" class="size-8 object-contain"></td>
                         <td class="px-6 py-4 font-medium">{{ $game->name }}</td>
                         <td class="px-6 py-4 text-gray-500">{{ $game->slug }}</td>
                         <td class="px-6 py-4">

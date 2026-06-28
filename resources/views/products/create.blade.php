@@ -13,7 +13,7 @@
             <select name="game_id" id="game_id" class="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" required>
                 <option value="">Pilih Game</option>
                 @foreach ($games as $game)
-                    <option value="{{ $game->id }}" {{ old('game_id') == $game->id ? 'selected' : '' }}>{{ $game->icon }} {{ $game->name }}</option>
+                    <option value="{{ $game->id }}" {{ old('game_id') == $game->id ? 'selected' : '' }}><img src="{{ asset('images/games/' . $game->icon) }}" alt="{{ $game->name }}" class="inline size-5 object-contain align-middle mr-1"> {{ $game->name }}</option>
                 @endforeach
             </select>
             @error('game_id') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror

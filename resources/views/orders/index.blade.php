@@ -36,7 +36,7 @@
                             <div class="font-medium">{{ $order->customer_name }}</div>
                             <div class="text-gray-500">{{ $order->customer_email }}</div>
                         </td>
-                        <td class="px-6 py-4">{{ $order->game->icon }} {{ $order->game->name }}</td>
+                        <td class="px-6 py-4"><img src="{{ asset('images/games/' . $order->game->icon) }}" alt="{{ $order->game->name }}" class="inline size-6 object-contain align-middle mr-1"> {{ $order->game->name }}</td>
                         <td class="px-6 py-4">{{ $order->product->name }}</td>
                         <td class="px-6 py-4">{{ $order->player_id }}{{ $order->server_id ? ' ('.$order->server_id.')' : '' }}</td>
                         <td class="px-6 py-4 text-right">Rp {{ number_format($order->amount, 0, ',', '.') }}</td>

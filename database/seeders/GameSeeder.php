@@ -11,11 +11,11 @@ class GameSeeder extends Seeder
     public function run(): void
     {
         $games = [
-            ['name' => 'Mobile Legends', 'icon' => '🎮', 'is_active' => true],
-            ['name' => 'Free Fire', 'icon' => '🔥', 'is_active' => true],
-            ['name' => 'PUBG Mobile', 'icon' => '🔫', 'is_active' => true],
-            ['name' => 'Genshin Impact', 'icon' => '⭐', 'is_active' => true],
-            ['name' => 'Valorant', 'icon' => '🔫', 'is_active' => true],
+            ['name' => 'Mobile Legends', 'icon' => 'mlbb.png', 'is_active' => true],
+            ['name' => 'Free Fire', 'icon' => 'freefire.png', 'is_active' => true],
+            ['name' => 'PUBG Mobile', 'icon' => 'pubg.png', 'is_active' => true],
+            ['name' => 'Genshin Impact', 'icon' => 'genshin.png', 'is_active' => true],
+            ['name' => 'Valorant', 'icon' => 'valorant.png', 'is_active' => true],
         ];
 
         foreach ($games as $game) {

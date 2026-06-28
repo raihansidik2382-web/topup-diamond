@@ -16,11 +16,11 @@ class GameFactory extends Factory
     public function definition(): array
     {
         $games = [
-            'Mobile Legends' => '🎮',
-            'Free Fire' => '🔥',
-            'PUBG Mobile' => '🔫',
-            'Genshin Impact' => '⭐',
-            'Valorant' => '🔫',
+            'Mobile Legends' => 'mlbb.png',
+            'Free Fire' => 'freefire.png',
+            'PUBG Mobile' => 'pubg.png',
+            'Genshin Impact' => 'genshin.png',
+            'Valorant' => 'valorant.png',
         ];
 
         $name = $this->faker->unique()->randomElement(array_keys($games));
@@ -28,7 +28,7 @@ class GameFactory extends Factory
         return [
             'name' => $name,
             'slug' => Str::slug($name),
-            'icon' => $games[$name] ?? '🎮',
+            'icon' => $games[$name] ?? 'mlbb.png',
             'is_active' => true,
         ];
     }

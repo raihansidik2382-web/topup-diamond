@@ -23,7 +23,7 @@
             <tbody class="divide-y divide-gray-200">
                 @forelse ($products as $product)
                     <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4">{{ $product->game->icon }} {{ $product->game->name }}</td>
+                        <td class="px-6 py-4"><img src="{{ asset('images/games/' . $product->game->icon) }}" alt="{{ $product->game->name }}" class="inline size-6 object-contain align-middle mr-1"> {{ $product->game->name }}</td>
                         <td class="px-6 py-4 font-medium">{{ $product->name }}</td>
                         <td class="px-6 py-4 text-right">{{ number_format($product->currency_amount) }}</td>
                         <td class="px-6 py-4 text-right">Rp {{ number_format($product->price, 0, ',', '.') }}</td>

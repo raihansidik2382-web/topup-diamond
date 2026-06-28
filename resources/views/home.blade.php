@@ -12,7 +12,7 @@
         @forelse ($games as $game)
             <div class="rounded-lg border border-gray-200 bg-white p-6 hover:shadow-md transition-shadow">
                 <div class="flex items-center gap-3 mb-4">
-                    <span class="text-3xl">{{ $game->icon }}</span>
+                    <img src="{{ asset('images/games/' . $game->icon) }}" alt="{{ $game->name }}" class="size-10 object-contain">
                     <h2 class="text-lg font-semibold">{{ $game->name }}</h2>
                 </div>
 
