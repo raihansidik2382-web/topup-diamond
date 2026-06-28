@@ -23,5 +23,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@example.com',
             'role' => 'user',
         ]);
+
+        $this->call([
+            GameSeeder::class,
+            ProductSeeder::class,
+            OrderSeeder::class,
+        ]);
     }
 }
