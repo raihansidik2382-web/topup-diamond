@@ -5,7 +5,7 @@
 @section('content')
     <div class="mb-8">
         <h1 class="text-2xl font-semibold mb-2">Topup Game</h1>
-        <p class="text-gray-500">Pilih game dan produk topup favoritmu.</p>
+        <p class="text-gray-500">Pilih game, pilih produk langsung, dan isi data pemain.</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -21,16 +21,18 @@
                     <input type="hidden" name="game_id" value="{{ $game->id }}">
 
                     <div class="mb-3">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Produk</label>
-                        <select name="product_id" required
-                            class="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
-                            <option value="">Pilih produk</option>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pilih Produk</label>
+                        <div class="grid grid-cols-2 gap-2">
                             @foreach ($game->products->where('is_active', true) as $product)
-                                <option value="{{ $product->id }}" data-price="{{ $product->price }}">
-                                    {{ $product->name }} - Rp {{ number_format($product->price, 0, ',', '.') }}
-                                </option>
+                                <label class="product-option relative flex cursor-pointer rounded-lg border border-gray-200 p-3 hover:border-indigo-400 has-[:checked]:border-indigo-600 has-[:checked]:bg-indigo-50 transition-colors">
+                                    <input type="radio" name="product_id" value="{{ $product->id }}" data-price="{{ $product->price_in_idr }}" class="sr-only peer" required>
+                                    <div class="w-full text-center">
+                                        <div class="text-sm font-semibold text-gray-900">{{ $product->name }}</div>
+                                        <div class="text-xs text-gray-500 mt-0.5">{{ $product->formatted_price }}</div>
+                                    </div>
+                                </label>
                             @endforeach
-                        </select>
+                        </div>
                     </div>
 
                     <div class="mb-3">

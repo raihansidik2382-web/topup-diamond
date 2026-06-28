@@ -24,6 +24,7 @@ class ProductFactory extends Factory
             'name' => $currencyAmount.' '.$this->faker->randomElement(['Diamonds', 'UC', 'Diamond', 'Crystals', 'Points']),
             'currency_amount' => $currencyAmount,
             'price' => $this->faker->randomElement([5000, 10000, 25000, 50000, 100000, 200000]),
+            'currency' => $this->faker->randomElement(['IDR', 'IDR', 'IDR', 'USD']),
             'description' => $this->faker->sentence(),
             'is_active' => true,
         ];

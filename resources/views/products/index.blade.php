@@ -26,7 +26,7 @@
                         <td class="px-6 py-4"><img src="{{ asset('images/games/' . $product->game->icon) }}" alt="{{ $product->game->name }}" class="inline size-6 object-contain align-middle mr-1"> {{ $product->game->name }}</td>
                         <td class="px-6 py-4 font-medium">{{ $product->name }}</td>
                         <td class="px-6 py-4 text-right">{{ number_format($product->currency_amount) }}</td>
-                        <td class="px-6 py-4 text-right">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+                        <td class="px-6 py-4 text-right">{{ $product->formatted_price }} @if ($product->currency === 'USD')<span class="text-xs text-gray-400 ml-1">(USD)</span>@endif</td>
                         <td class="px-6 py-4">
                             @if ($product->is_active)
                                 <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">Aktif</span>

@@ -32,9 +32,18 @@
         </div>
 
         <div class="mb-4">
-            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga (Rp)</label>
+            <label for="price" class="block text-sm font-medium text-gray-700 mb-1">Harga</label>
             <input type="number" name="price" id="price" value="{{ old('price') }}" class="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500" required>
             @error('price') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
+        </div>
+
+        <div class="mb-4">
+            <label for="currency" class="block text-sm font-medium text-gray-700 mb-1">Mata Uang</label>
+            <select name="currency" id="currency" class="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500">
+                <option value="IDR" {{ old('currency') == 'IDR' ? 'selected' : '' }}>IDR (Rupiah)</option>
+                <option value="USD" {{ old('currency') == 'USD' ? 'selected' : '' }}>USD (Dolar)</option>
+            </select>
+            @error('currency') <p class="mt-1 text-sm text-red-600">{{ $message }}</p> @enderror
         </div>
 
         <div class="mb-4">

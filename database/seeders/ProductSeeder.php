@@ -27,14 +27,6 @@ class ProductSeeder extends Seeder
                 ['name' => '1450 Diamonds', 'currency_amount' => 1450, 'price' => 100000],
                 ['name' => 'Membership Mingguan', 'currency_amount' => 0, 'price' => 15000],
             ],
-            'PUBG Mobile' => [
-                ['name' => '60 UC', 'currency_amount' => 60, 'price' => 5000],
-                ['name' => '180 UC', 'currency_amount' => 180, 'price' => 15000],
-                ['name' => '325 UC', 'currency_amount' => 325, 'price' => 25000],
-                ['name' => '660 UC', 'currency_amount' => 660, 'price' => 50000],
-                ['name' => '1800 UC', 'currency_amount' => 1800, 'price' => 150000],
-                ['name' => 'Royal Pass', 'currency_amount' => 0, 'price' => 80000],
-            ],
             'Genshin Impact' => [
                 ['name' => '60 Genesis Crystals', 'currency_amount' => 60, 'price' => 15000],
                 ['name' => '300 Genesis Crystals', 'currency_amount' => 300, 'price' => 75000],
@@ -51,6 +43,14 @@ class ProductSeeder extends Seeder
                 ['name' => '5350 Valorant Points', 'currency_amount' => 5350, 'price' => 500000],
                 ['name' => '11000 Valorant Points', 'currency_amount' => 11000, 'price' => 1000000],
             ],
+            'PUBG Mobile' => [
+                ['name' => '60 UC', 'currency_amount' => 60, 'price' => 1, 'currency' => 'USD'],
+                ['name' => '325 UC', 'currency_amount' => 325, 'price' => 5, 'currency' => 'USD'],
+                ['name' => '660 UC', 'currency_amount' => 660, 'price' => 10, 'currency' => 'USD'],
+                ['name' => '1800 UC', 'currency_amount' => 1800, 'price' => 25, 'currency' => 'USD'],
+                ['name' => '3850 UC', 'currency_amount' => 3850, 'price' => 50, 'currency' => 'USD'],
+                ['name' => '8100 UC', 'currency_amount' => 8100, 'price' => 100, 'currency' => 'USD'],
+            ],
         ];
 
         foreach ($products as $gameName => $gameProducts) {
@@ -66,6 +66,7 @@ class ProductSeeder extends Seeder
                     'name' => $product['name'],
                     'currency_amount' => $product['currency_amount'],
                     'price' => $product['price'],
+                    'currency' => $product['currency'] ?? 'IDR',
                     'is_active' => true,
                 ]);
             }

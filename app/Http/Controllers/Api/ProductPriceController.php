@@ -26,7 +26,9 @@ class ProductPriceController extends Controller
                 'name' => $product->name,
                 'currency_amount' => $product->currency_amount,
                 'price' => $product->price,
-                'price_formatted' => 'Rp '.number_format($product->price, 0, ',', '.'),
+                'currency' => $product->currency,
+                'price_in_idr' => $product->price_in_idr,
+                'price_formatted' => $product->formatted_price,
                 'description' => $product->description,
             ]),
         ]);

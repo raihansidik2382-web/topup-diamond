@@ -45,7 +45,7 @@ class OrderController extends Controller
 
         $product = Product::findOrFail($validated['product_id']);
 
-        $validated['amount'] = $product->price;
+        $validated['amount'] = $product->price_in_idr;
         $validated['status'] = 'pending';
 
         Order::create($validated);
