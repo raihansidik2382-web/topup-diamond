@@ -4,48 +4,48 @@
 
 @section('content')
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-semibold">Daftar Produk</h1>
-        <a href="{{ route('admin.products.create') }}" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">Tambah Produk</a>
+        <h1 class="text-2xl font-black uppercase tracking-[0.15em]">Daftar Produk</h1>
+        <a href="{{ route('admin.products.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Tambah Produk</a>
     </div>
 
-    <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <table class="min-w-full divide-y divide-gray-200 text-sm">
-            <thead class="bg-gray-50">
+    <div class="overflow-hidden rounded-xl border border-white/5 bg-navy-light">
+        <table class="min-w-full divide-y divide-white/5 text-sm">
+            <thead class="bg-navy-dark">
                 <tr>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Game</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Nama</th>
-                    <th class="px-6 py-3 text-right font-medium text-gray-500">Jumlah</th>
-                    <th class="px-6 py-3 text-right font-medium text-gray-500">Harga</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Status</th>
-                    <th class="px-6 py-3 text-right font-medium text-gray-500">Aksi</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Game</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Nama</th>
+                    <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Jumlah</th>
+                    <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Harga</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-white/5">
                 @forelse ($products as $product)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4"><img src="{{ asset('images/games/' . $product->game->icon) }}" alt="{{ $product->game->name }}" class="inline size-6 object-contain align-middle mr-1"> {{ $product->game->name }}</td>
+                    <tr class="hover:bg-navy-dark/50">
+                        <td class="px-6 py-4">{{ $product->game->name }}</td>
                         <td class="px-6 py-4 font-medium">{{ $product->name }}</td>
                         <td class="px-6 py-4 text-right">{{ number_format($product->currency_amount) }}</td>
-                        <td class="px-6 py-4 text-right">{{ $product->formatted_price }} @if ($product->currency === 'USD')<span class="text-xs text-gray-400 ml-1">(USD)</span>@endif</td>
+                        <td class="px-6 py-4 text-right">{{ $product->formatted_price }} @if ($product->currency === 'USD')<span class="text-xs text-muted ml-1">(USD)</span>@endif</td>
                         <td class="px-6 py-4">
                             @if ($product->is_active)
-                                <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">Aktif</span>
+                                <span class="inline-flex rounded-full bg-green-900/50 border border-green-700 px-2 py-0.5 text-xs font-medium text-green-300">Aktif</span>
                             @else
-                                <span class="inline-flex rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">Nonaktif</span>
+                                <span class="inline-flex rounded-full bg-red-900/50 border border-red-700 px-2 py-0.5 text-xs font-medium text-red-300">Nonaktif</span>
                             @endif
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="{{ route('admin.products.edit', $product) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <a href="{{ route('admin.products.edit', $product) }}" class="text-orange-accent hover:text-orange-accent/80">Edit</a>
                             <form action="{{ route('admin.products.destroy', $product) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Yakin ingin menghapus produk ini?')">
                                 @csrf
                                 @method('DELETE')
-                                <button type="submit" class="text-red-600 hover:text-red-900">Hapus</button>
+                                <button type="submit" class="text-red-400 hover:text-red-300">Hapus</button>
                             </form>
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="6" class="px-6 py-12 text-center text-gray-500">Belum ada produk.</td>
+                        <td colspan="6" class="px-6 py-12 text-center text-muted">Belum ada produk.</td>
                     </tr>
                 @endforelse
             </tbody>

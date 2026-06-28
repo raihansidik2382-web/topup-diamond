@@ -4,59 +4,59 @@
 
 @section('content')
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-semibold">@auth @if(auth()->user()->isAdmin()) Daftar @endif Pesanan @endauth</h1>
+        <h1 class="text-2xl font-black uppercase tracking-[0.15em]">@auth @if(auth()->user()->isAdmin()) Daftar @endif Pesanan @endauth</h1>
         @auth
             @if (auth()->user()->isAdmin())
-                <a href="{{ route('admin.orders.create') }}" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">Tambah Pesanan</a>
+                <a href="{{ route('admin.orders.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Tambah Pesanan</a>
             @endif
         @endauth
     </div>
 
-    <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
-        <table class="min-w-full divide-y divide-gray-200 text-sm">
-            <thead class="bg-gray-50">
+    <div class="overflow-hidden rounded-xl border border-white/5 bg-navy-light">
+        <table class="min-w-full divide-y divide-white/5 text-sm">
+            <thead class="bg-navy-dark">
                 <tr>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Pelanggan</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Game</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Produk</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Player ID</th>
-                    <th class="px-6 py-3 text-right font-medium text-gray-500">Total</th>
-                    <th class="px-6 py-3 text-left font-medium text-gray-500">Status</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Pelanggan</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Game</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Produk</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Player ID</th>
+                    <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Total</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Status</th>
                     @auth
                         @if (auth()->user()->isAdmin())
-                            <th class="px-6 py-3 text-right font-medium text-gray-500">Aksi</th>
+                            <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Aksi</th>
                         @endif
                     @endauth
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-white/5">
                 @forelse ($orders as $order)
-                    <tr class="hover:bg-gray-50">
+                    <tr class="hover:bg-navy-dark/50">
                         <td class="px-6 py-4">
                             <div class="font-medium">{{ $order->customer_name }}</div>
-                            <div class="text-gray-500">{{ $order->customer_email }}</div>
+                            <div class="text-muted text-xs">{{ $order->customer_email }}</div>
                         </td>
-                        <td class="px-6 py-4"><img src="{{ asset('images/games/' . $order->game->icon) }}" alt="{{ $order->game->name }}" class="inline size-6 object-contain align-middle mr-1"> {{ $order->game->name }}</td>
+                        <td class="px-6 py-4">{{ $order->game->name }}</td>
                         <td class="px-6 py-4">{{ $order->product->name }}</td>
                         <td class="px-6 py-4">{{ $order->player_id }}{{ $order->server_id ? ' ('.$order->server_id.')' : '' }}</td>
                         <td class="px-6 py-4 text-right">Rp {{ number_format($order->amount, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">
                             @if ($order->status === 'success')
-                                <span class="inline-flex rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-700">Sukses</span>
+                                <span class="inline-flex rounded-full bg-green-900/50 border border-green-700 px-2 py-0.5 text-xs font-medium text-green-300">Sukses</span>
                             @elseif ($order->status === 'pending')
-                                <span class="inline-flex rounded-full bg-yellow-100 px-2 py-0.5 text-xs font-medium text-yellow-700">Pending</span>
+                                <span class="inline-flex rounded-full bg-yellow-900/50 border border-yellow-700 px-2 py-0.5 text-xs font-medium text-yellow-300">Pending</span>
                             @else
-                                <span class="inline-flex rounded-full bg-red-100 px-2 py-0.5 text-xs font-medium text-red-700">Gagal</span>
+                                <span class="inline-flex rounded-full bg-red-900/50 border border-red-700 px-2 py-0.5 text-xs font-medium text-red-300">Gagal</span>
                             @endif
                         </td>
                         @auth
                             @if (auth()->user()->isAdmin())
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('admin.orders.edit', $order) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    <a href="{{ route('admin.orders.edit', $order) }}" class="text-orange-accent hover:text-orange-accent/80">Edit</a>
                                     <form action="{{ route('admin.orders.destroy', $order) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-600 hover:text-red-900">Hapus</button>
+                                        <button type="submit" class="text-red-400 hover:text-red-300">Hapus</button>
                                     </form>
                                 </td>
                             @endif
@@ -64,7 +64,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="{{ auth()->check() && auth()->user()->isAdmin() ? 7 : 6 }}" class="px-6 py-12 text-center text-gray-500">Belum ada pesanan.</td>
+                        <td colspan="{{ auth()->check() && auth()->user()->isAdmin() ? 7 : 6 }}" class="px-6 py-12 text-center text-muted">Belum ada pesanan.</td>
                     </tr>
                 @endforelse
             </tbody>
