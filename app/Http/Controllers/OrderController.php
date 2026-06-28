@@ -1,0 +1,81 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Game;
+use App\Models\Order;
+use App\Models\Product;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
+
+class OrderController extends Controller
+{
+    public function index(): View
+    {
+        $orders = Order::with(['game', 'product'])->latest()->paginate(10);
+
+        return view('orders.index', compact('orders'));
+    }
+
+    public function create(): View
+    {
+        $games = Game::where('is_active', true)->get();
+        $products = Product::where('is_active', true)->get();
+
+        return view('orders.create', compact('games', 'products'));
+    }
+
+    public function store(Request $request): RedirectResponse
+    {
+        $validated = $request->validate([
+            'game_id' => ['required', 'exists:games,id'],
+            'product_id' => ['required', 'exists:products,id'],
+            'customer_name' => ['required', 'string', 'max:255'],
+            'customer_email' => ['required', 'email', 'max:255'],
+            'player_id' => ['required', 'string', 'max:255'],
+            'server_id' => ['nullable', 'string', 'max:50'],
+            'amount' => ['required', 'integer', 'min:0'],
+            'status' => ['required', 'in:pending,success,failed'],
+            'payment_method' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        Order::create($validated);
+
+        return redirect()->route('orders.index')->with('success', 'Pesanan berhasil ditambahkan.');
+    }
+
+    public function edit(Order $order): View
+    {
+        $games = Game::where('is_active', true)->get();
+        $products = Product::where('is_active', true)->get();
+
+        return view('orders.edit', compact('order', 'games', 'products'));
+    }
+
+    public function update(Request $request, Order $order): RedirectResponse
+    {
+        $validated = $request->validate([
+            'game_id' => ['required', 'exists:games,id'],
+            'product_id' => ['required', 'exists:products,id'],
+            'customer_name' => ['required', 'string', 'max:255'],
+            'customer_email' => ['required', 'email', 'max:255'],
+            'player_id' => ['required', 'string', 'max:255'],
+            'server_id' => ['nullable', 'string', 'max:50'],
+            'amount' => ['required', 'integer', 'min:0'],
+            'status' => ['required', 'in:pending,success,failed'],
+            'payment_method' => ['nullable', 'string', 'max:100'],
+        ]);
+
+        $order->update($validated);
+
+        return redirect()->route('orders.index')->with('success', 'Pesanan berhasil diperbarui.');
+    }
+
+    public function destroy(Order $order): RedirectResponse
+    {
+        $order->delete();
+
+        return redirect()->route('orders.index')->with('success', 'Pesanan berhasil dihapus.');
+    }
+}
