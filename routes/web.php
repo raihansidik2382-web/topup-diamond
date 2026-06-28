@@ -13,7 +13,8 @@ use App\Services\CurrencyService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $games = Game::all();
+    $search = request('search');
+    $games = $search ? Game::where('name', 'like', '%'.$search.'%')->get() : Game::all();
 
     return view('topup', compact('games'));
 })->name('home');

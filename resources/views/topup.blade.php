@@ -94,15 +94,15 @@
         {{-- Top bar --}}
         <header class="sticky top-0 z-20 h-16 bg-navy-dark/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 md:px-8 gap-4">
             {{-- Search --}}
-            <div class="flex-1 max-w-md">
+            <form action="{{ route('home') }}" method="GET" class="flex-1 max-w-md">
                 <div class="relative">
                     <svg class="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-muted" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
-                    <input type="text" placeholder="Cari game favorit kamu..."
+                    <input type="text" name="search" value="{{ request('search') }}" placeholder="Cari game favorit kamu..."
                            class="w-full pl-10 pr-4 py-2 text-sm rounded-full bg-navy-light border border-muted/20 text-[#f5f5f5] placeholder-muted focus:outline-none focus:border-orange-accent focus:ring-1 focus:ring-orange-accent/30 transition-colors uppercase tracking-wider">
                 </div>
-            </div>
+            </form>
 
             {{-- User area --}}
             <div class="flex items-center gap-3">
@@ -142,9 +142,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
                         <path stroke-linecap="round" stroke-linejoin="round" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                     </svg>
-                    <h2 class="text-lg font-black uppercase tracking-[0.15em] text-white">Games Populer</h2>
+                    <h2 class="text-lg font-black uppercase tracking-[0.15em] text-white">{{ request('search') ? 'Hasil Pencarian' : 'Games Populer' }}</h2>
                 </div>
                 <div class="h-px w-16 bg-orange-accent mb-6"></div>
+                @if (request('search'))
+                    <p class="text-sm text-muted mb-4">Menampilkan hasil untuk "{{ request('search') }}"</p>
+                    <a href="{{ route('home') }}" class="inline-block text-sm text-orange-accent hover:text-orange-accent/80 mb-4">&larr; Lihat Semua</a>
+                @endif
 
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
                     @forelse ($games as $game)
