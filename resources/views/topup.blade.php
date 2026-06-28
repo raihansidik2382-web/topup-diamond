@@ -126,7 +126,14 @@
         <div class="p-4 md:p-8 space-y-10">
 
             {{-- Hero Banner --}}
-            <x-hero-banner :slides="$games->map(fn($g) => asset('images/games/' . $g->cover))->values()->toArray()" />
+            @php
+                $banners = [
+                    asset('images/banners/valorant-heroes-banner.avif'),
+                    asset('images/banners/GUSION night owl banner.jpg'),
+                    asset('images/banners/Genshin-Impact-5.4-release-date,-5.4-Banners-and-events-cover.jpg'),
+                ];
+            @endphp
+            <x-hero-banner :slides="$banners" />
 
             {{-- Games Populer --}}
             <section>
