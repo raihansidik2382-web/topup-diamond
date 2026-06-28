@@ -62,10 +62,44 @@
                         <input type="text" name="server_id" placeholder="ID server"
                             class="block w-full rounded-lg bg-navy-dark border border-white/5 px-3 py-2 text-sm text-[#f5f5f5] placeholder-muted focus:outline-none focus:border-orange-accent focus:ring-1 focus:ring-orange-accent/30">
                     </div>
+
+                    <div class="mb-5">
+                        <label class="block text-sm font-semibold text-muted mb-2 uppercase tracking-wider">Metode Pembayaran</label>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <label class="relative flex cursor-pointer rounded-xl border border-white/5 bg-navy-dark p-3 hover:border-orange-accent/50 has-[:checked]:border-orange-accent has-[:checked]:bg-orange-accent/10 transition-all duration-200">
+                                <input type="radio" name="payment_method" value="transfer_bca" class="sr-only peer" required>
+                                <div class="w-full text-center">
+                                    <div class="text-sm font-semibold">Bank Transfer BCA</div>
+                                    <div class="text-xs text-muted mt-0.5">Transfer via BCA</div>
+                                </div>
+                            </label>
+                            <label class="relative flex cursor-pointer rounded-xl border border-white/5 bg-navy-dark p-3 hover:border-orange-accent/50 has-[:checked]:border-orange-accent has-[:checked]:bg-orange-accent/10 transition-all duration-200">
+                                <input type="radio" name="payment_method" value="transfer_mandiri" class="sr-only peer" required>
+                                <div class="w-full text-center">
+                                    <div class="text-sm font-semibold">Bank Transfer Mandiri</div>
+                                    <div class="text-xs text-muted mt-0.5">Transfer via Mandiri</div>
+                                </div>
+                            </label>
+                            <label class="relative flex cursor-pointer rounded-xl border border-white/5 bg-navy-dark p-3 hover:border-orange-accent/50 has-[:checked]:border-orange-accent has-[:checked]:bg-orange-accent/10 transition-all duration-200">
+                                <input type="radio" name="payment_method" value="gopay" class="sr-only peer" required>
+                                <div class="w-full text-center">
+                                    <div class="text-sm font-semibold">GoPay</div>
+                                    <div class="text-xs text-muted mt-0.5">Bayar via GoPay</div>
+                                </div>
+                            </label>
+                            <label class="relative flex cursor-pointer rounded-xl border border-white/5 bg-navy-dark p-3 hover:border-orange-accent/50 has-[:checked]:border-orange-accent has-[:checked]:bg-orange-accent/10 transition-all duration-200">
+                                <input type="radio" name="payment_method" value="dana" class="sr-only peer" required>
+                                <div class="w-full text-center">
+                                    <div class="text-sm font-semibold">DANA</div>
+                                    <div class="text-xs text-muted mt-0.5">Bayar via DANA</div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
                 </div>
 
                 <button type="submit"
-                    class="mt-6 w-full rounded-xl bg-orange-accent px-4 py-3 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">
+                    class="mt-6 w-full rounded-xl bg-orange-accent px-4 py-3 text-sm font-semibold uppercase tracking-wider text-navy-dark hover:bg-white/80 transition-colors">
                     Pesan Sekarang
                 </button>
             </form>

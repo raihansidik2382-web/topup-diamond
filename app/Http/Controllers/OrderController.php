@@ -41,6 +41,7 @@ class OrderController extends Controller
             'customer_email' => ['required', 'email', 'max:255'],
             'player_id' => ['required', 'string', 'max:255'],
             'server_id' => ['nullable', 'string', 'max:50'],
+            'payment_method' => ['required', 'string', 'max:100'],
         ]);
 
         $product = Product::findOrFail($validated['product_id']);
@@ -78,6 +79,19 @@ class OrderController extends Controller
         $order->update($validated);
 
         return redirect()->route('orders.index')->with('success', 'Pesanan berhasil diperbarui.');
+    }
+
+    public function batchStatus(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'order_ids' => ['required', 'array'],
+            'order_ids.*' => ['exists:orders,id'],
+            'status' => ['required', 'in:pending,success,failed'],
+        ]);
+
+        Order::whereIn('id', $request->order_ids)->update(['status' => $request->status]);
+
+        return redirect()->route('admin.orders.index')->with('success', count($request->order_ids).' pesanan diubah ke '.$request->status.'.');
     }
 
     public function updateStatus(Order $order, string $status): RedirectResponse
