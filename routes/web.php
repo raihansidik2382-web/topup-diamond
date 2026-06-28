@@ -6,6 +6,9 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\GameController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
+use App\Models\Game;
+use App\Models\Order;
+use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'welcome')->name('home');

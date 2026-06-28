@@ -27,7 +27,7 @@ class LoginController extends Controller
             $user = auth()->user();
 
             if ($user->isAdmin()) {
-                return redirect()->intended(route('dashboard'));
+                return redirect()->intended(route('admin.dashboard'));
             }
 
             return redirect()->intended(route('home'));
