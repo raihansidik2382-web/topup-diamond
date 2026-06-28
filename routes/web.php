@@ -12,7 +12,7 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $games = Game::with(['products' => fn ($q) => $q->where('is_active', true)])
+    $games = Game::withCount(['products' => fn ($q) => $q->where('is_active', true)])
         ->where('is_active', true)
         ->get();
 
