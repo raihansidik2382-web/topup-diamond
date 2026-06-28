@@ -80,6 +80,17 @@ class OrderController extends Controller
         return redirect()->route('orders.index')->with('success', 'Pesanan berhasil diperbarui.');
     }
 
+    public function updateStatus(Order $order, string $status): RedirectResponse
+    {
+        if (! in_array($status, ['pending', 'success', 'failed'])) {
+            abort(404);
+        }
+
+        $order->update(['status' => $status]);
+
+        return redirect()->route('admin.orders.index')->with('success', 'Status pesanan diubah ke '.$status.'.');
+    }
+
     public function destroy(Order $order): RedirectResponse
     {
         $order->delete();

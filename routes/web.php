@@ -62,6 +62,7 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         ));
     })->name('dashboard');
 
+    Route::post('orders/{order}/status/{status}', [OrderController::class, 'updateStatus'])->name('orders.status');
     Route::resource('games', GameController::class);
     Route::resource('products', ProductController::class);
     Route::resource('orders', OrderController::class)->except(['show']);

@@ -5,11 +5,6 @@
 @section('content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-black uppercase tracking-[0.15em]">{{ auth()->user()?->isAdmin() ? 'Daftar Pesanan' : 'Pesanan Saya' }}</h1>
-        @auth
-            @if (auth()->user()->isAdmin())
-                <a href="{{ route('admin.orders.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Tambah Pesanan</a>
-            @endif
-        @endauth
     </div>
 
     <div class="overflow-hidden rounded-xl border border-white/5 bg-navy-light">
@@ -62,12 +57,26 @@
                         @auth
                             @if (auth()->user()->isAdmin())
                                 <td class="px-6 py-4 text-right">
-                                    <a href="{{ route('admin.orders.edit', $order) }}" class="text-orange-accent hover:text-orange-accent/80">Edit</a>
-                                    <form action="{{ route('admin.orders.destroy', $order) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Yakin ingin menghapus pesanan ini?')">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="text-red-400 hover:text-red-300">Hapus</button>
-                                    </form>
+                                    <div class="flex items-center gap-1.5">
+                                        @if ($order->status !== 'success')
+                                            <form action="{{ route('admin.orders.status', [$order, 'success']) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="rounded bg-green-900/50 border border-green-700 px-2 py-1 text-xs font-medium text-green-300 hover:bg-green-900/80 transition-colors">Selesai</button>
+                                            </form>
+                                        @endif
+                                        @if ($order->status !== 'pending')
+                                            <form action="{{ route('admin.orders.status', [$order, 'pending']) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="rounded bg-yellow-900/50 border border-yellow-700 px-2 py-1 text-xs font-medium text-yellow-300 hover:bg-yellow-900/80 transition-colors">Pending</button>
+                                            </form>
+                                        @endif
+                                        @if ($order->status !== 'failed')
+                                            <form action="{{ route('admin.orders.status', [$order, 'failed']) }}" method="POST" class="inline">
+                                                @csrf
+                                                <button type="submit" class="rounded bg-red-900/50 border border-red-700 px-2 py-1 text-xs font-medium text-red-300 hover:bg-red-900/80 transition-colors">Batal</button>
+                                            </form>
+                                        @endif
+                                    </div>
                                 </td>
                             @endif
                         @endauth
