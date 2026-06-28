@@ -1,10 +1,10 @@
 @extends('layouts.app')
 
-@section('title', 'Daftar Pesanan')
+@section('title', auth()->user()?->isAdmin() ? 'Daftar Pesanan' : 'Pesanan Saya')
 
 @section('content')
     <div class="flex items-center justify-between mb-6">
-        <h1 class="text-2xl font-black uppercase tracking-[0.15em]">@auth @if(auth()->user()->isAdmin()) Daftar @endif Pesanan @endauth</h1>
+        <h1 class="text-2xl font-black uppercase tracking-[0.15em]">{{ auth()->user()?->isAdmin() ? 'Daftar Pesanan' : 'Pesanan Saya' }}</h1>
         @auth
             @if (auth()->user()->isAdmin())
                 <a href="{{ route('admin.orders.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Tambah Pesanan</a>
@@ -16,10 +16,15 @@
         <table class="min-w-full divide-y divide-white/5 text-sm">
             <thead class="bg-navy-dark">
                 <tr>
-                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Pelanggan</th>
+                    @auth
+                        @if (auth()->user()->isAdmin())
+                            <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Pelanggan</th>
+                        @endif
+                    @endauth
                     <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Game</th>
                     <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Produk</th>
                     <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Player ID</th>
+                    <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Tanggal</th>
                     <th class="px-6 py-3 text-right font-semibold text-muted uppercase tracking-wider">Total</th>
                     <th class="px-6 py-3 text-left font-semibold text-muted uppercase tracking-wider">Status</th>
                     @auth
@@ -32,13 +37,18 @@
             <tbody class="divide-y divide-white/5">
                 @forelse ($orders as $order)
                     <tr class="hover:bg-navy-dark/50">
-                        <td class="px-6 py-4">
-                            <div class="font-medium">{{ $order->customer_name }}</div>
-                            <div class="text-muted text-xs">{{ $order->customer_email }}</div>
-                        </td>
+                        @auth
+                            @if (auth()->user()->isAdmin())
+                                <td class="px-6 py-4">
+                                    <div class="font-medium">{{ $order->customer_name }}</div>
+                                    <div class="text-muted text-xs">{{ $order->customer_email }}</div>
+                                </td>
+                            @endif
+                        @endauth
                         <td class="px-6 py-4">{{ $order->game->name }}</td>
                         <td class="px-6 py-4">{{ $order->product->name }}</td>
                         <td class="px-6 py-4">{{ $order->player_id }}{{ $order->server_id ? ' ('.$order->server_id.')' : '' }}</td>
+                        <td class="px-6 py-4 text-muted text-xs">{{ $order->created_at->format('d M Y H:i') }}</td>
                         <td class="px-6 py-4 text-right">Rp {{ number_format($order->amount, 0, ',', '.') }}</td>
                         <td class="px-6 py-4">
                             @if ($order->status === 'success')
@@ -64,7 +74,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="{{ auth()->check() && auth()->user()->isAdmin() ? 7 : 6 }}" class="px-6 py-12 text-center text-muted">Belum ada pesanan.</td>
+                        <td colspan="{{ auth()->check() && auth()->user()->isAdmin() ? 8 : 6 }}" class="px-6 py-12 text-center text-muted">Belum ada pesanan.</td>
                     </tr>
                 @endforelse
             </tbody>
