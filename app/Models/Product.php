@@ -42,7 +42,13 @@ class Product extends Model
     public function formattedPrice(): Attribute
     {
         return Attribute::get(function () {
-            return App::make(CurrencyService::class)->formatIdr($this->price_in_idr);
+            $currencyService = App::make(CurrencyService::class);
+
+            if ($this->currency === 'USD') {
+                return $currencyService->formatUsd($this->price);
+            }
+
+            return $currencyService->formatIdr($this->price);
         });
     }
 

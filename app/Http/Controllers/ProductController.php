@@ -31,6 +31,7 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'currency_amount' => ['required', 'integer', 'min:1'],
             'price' => ['required', 'integer', 'min:0'],
+            'currency' => ['required', 'in:IDR,USD'],
             'description' => ['nullable', 'string'],
             'is_active' => ['boolean'],
         ]);
@@ -54,6 +55,7 @@ class ProductController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'currency_amount' => ['required', 'integer', 'min:1'],
             'price' => ['required', 'integer', 'min:0'],
+            'currency' => ['required', 'in:IDR,USD'],
             'description' => ['nullable', 'string'],
             'is_active' => ['boolean'],
         ]);
