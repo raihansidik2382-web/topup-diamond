@@ -12,12 +12,18 @@ use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $games = Game::withWhereHas('products', fn ($q) => $q->where('is_active', true))
+    $games = Game::with(['products' => fn ($q) => $q->where('is_active', true)])
         ->where('is_active', true)
         ->get();
 
     return view('home', compact('games'));
 })->name('home');
+
+Route::get('/games/{game:slug}', function (Game $game) {
+    $game->load(['products' => fn ($q) => $q->where('is_active', true)]);
+
+    return view('games.show', compact('game'));
+})->name('games.show');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
