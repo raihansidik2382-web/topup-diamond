@@ -10,12 +10,12 @@
 
 <section
     id="{{ $slideId }}"
-    class="relative overflow-hidden rounded-2xl bg-navy-dark min-h-[260px] md:min-h-[360px] flex items-center justify-center border border-orange-accent/10"
+    class="relative overflow-hidden rounded-2xl bg-navy-dark aspect-[16/7] md:aspect-[21/9] min-h-[220px] flex items-center justify-center border border-orange-accent/10"
 >
     {{-- Slide backgrounds --}}
     @foreach ($slides as $i => $image)
         <div
-            class="slide absolute inset-0 bg-cover bg-top transition-opacity duration-700"
+            class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-700"
             style="background-image: url('{{ $image }}'); {{ $i > 0 ? 'opacity: 0;' : '' }}"
         ></div>
     @endforeach
