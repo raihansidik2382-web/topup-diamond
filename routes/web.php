@@ -11,7 +11,13 @@ use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'welcome')->name('home');
+Route::get('/', function () {
+    $games = Game::withWhereHas('products', fn ($q) => $q->where('is_active', true))
+        ->where('is_active', true)
+        ->get();
+
+    return view('home', compact('games'));
+})->name('home');
 
 Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
