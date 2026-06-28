@@ -126,7 +126,7 @@
         <div class="p-4 md:p-8 space-y-10">
 
             {{-- Hero Banner --}}
-            <x-hero-banner />
+            <x-hero-banner :slides="$games->map(fn($g) => asset('images/games/' . $g->cover))->values()->toArray()" />
 
             {{-- Games Populer --}}
             <section>
