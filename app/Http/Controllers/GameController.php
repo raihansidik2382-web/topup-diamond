@@ -27,6 +27,7 @@ class GameController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'icon' => ['nullable', 'string', 'max:50'],
+            'cover' => ['nullable', 'string', 'max:50'],
             'is_active' => ['boolean'],
         ]);
 
@@ -34,7 +35,7 @@ class GameController extends Controller
 
         Game::create($validated);
 
-        return redirect()->route('games.index')->with('success', 'Game berhasil ditambahkan.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil ditambahkan.');
     }
 
     public function edit(Game $game): View
@@ -47,6 +48,7 @@ class GameController extends Controller
         $validated = $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'icon' => ['nullable', 'string', 'max:50'],
+            'cover' => ['nullable', 'string', 'max:50'],
             'is_active' => ['boolean'],
         ]);
 
@@ -54,13 +56,13 @@ class GameController extends Controller
 
         $game->update($validated);
 
-        return redirect()->route('games.index')->with('success', 'Game berhasil diperbarui.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil diperbarui.');
     }
 
     public function destroy(Game $game): RedirectResponse
     {
         $game->delete();
 
-        return redirect()->route('games.index')->with('success', 'Game berhasil dihapus.');
+        return redirect()->route('admin.games.index')->with('success', 'Game berhasil dihapus.');
     }
 }

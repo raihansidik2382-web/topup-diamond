@@ -21,6 +21,12 @@
             @error('icon') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
         </div>
 
+        <div class="mb-4">
+            <label for="cover" class="block text-sm font-semibold text-muted mb-1 uppercase tracking-wider">Cover</label>
+            <input type="text" name="cover" id="cover" value="{{ old('cover', $game->cover) }}" placeholder="nama-file-cover.jpg" class="block w-full rounded-lg bg-navy-light border border-white/5 px-3 py-2 text-sm text-[#f5f5f5] placeholder-muted focus:outline-none focus:border-orange-accent focus:ring-1 focus:ring-orange-accent/30">
+            @error('cover') <p class="mt-1 text-sm text-red-400">{{ $message }}</p> @enderror
+        </div>
+
         <div class="mb-6">
             <label class="flex items-center gap-2">
                 <input type="checkbox" name="is_active" value="1" {{ old('is_active', $game->is_active) ? 'checked' : '' }} class="rounded border-white/5 bg-navy-light text-orange-accent focus:ring-orange-accent/30">

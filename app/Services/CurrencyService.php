@@ -20,6 +20,22 @@ class CurrencyService
         return (int) round($amount * $rate);
     }
 
+    public function idrToUsd(int $amount): float
+    {
+        $rate = $this->getRate();
+
+        if ($rate <= 0) {
+            return 0;
+        }
+
+        return round($amount / $rate, 2);
+    }
+
+    public function formatUsd(float $amount): string
+    {
+        return '$ '.number_format($amount, 2, '.', ',');
+    }
+
     public function getRate(): float
     {
         return Cache::remember(self::CACHE_KEY, self::CACHE_TTL, function () {

@@ -13,7 +13,7 @@ class Game extends Model
     /** @use HasFactory<GameFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'slug', 'icon', 'is_active'];
+    protected $fillable = ['name', 'slug', 'icon', 'cover', 'is_active'];
 
     protected function casts(): array
     {

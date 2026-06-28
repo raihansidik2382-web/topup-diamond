@@ -139,21 +139,17 @@
                 </div>
                 <div class="h-px w-16 bg-orange-accent mb-6"></div>
 
-                {{-- TODO: ganti data dummy ini nanti dengan data dari API/database --}}
-                @php
-                    $dummyGames = [
-                        ['name' => 'Valorant', 'category' => 'FPS', 'image' => asset('images/games/valorant-cover.jpg')],
-                        ['name' => 'Genshin Impact', 'category' => 'RPG', 'image' => asset('images/games/genshin-cover.jpg')],
-                        ['name' => 'PUBG Mobile', 'category' => 'Battle Royale', 'image' => asset('images/games/pubg-cover.jpg')],
-                        ['name' => 'Mobile Legends', 'category' => 'MOBA', 'image' => asset('images/games/mlbb-cover.jpg')],
-                        ['name' => 'Free Fire', 'category' => 'Battle Royale', 'image' => asset('images/games/freefire-cover.jpg')],
-                    ];
-                @endphp
-
                 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
-                    @foreach ($dummyGames as $game)
-                        <x-game-card :name="$game['name']" :category="$game['category']" :image="$game['image']" />
-                    @endforeach
+                    @forelse ($games as $game)
+                        <x-game-card
+                            :name="$game->name"
+                            category="Game"
+                            :image="asset('images/games/' . $game->cover)"
+                            :url="route('games.show', $game->slug)"
+                        />
+                    @empty
+                        <p class="text-muted text-sm col-span-full">Belum ada game tersedia.</p>
+                    @endforelse
                 </div>
             </section>
         </div>

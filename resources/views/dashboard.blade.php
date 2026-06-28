@@ -25,6 +25,36 @@
         </div>
     </div>
 
+    {{-- Sales Statistics --}}
+    <div class="mt-8">
+        <h2 class="text-lg font-black uppercase tracking-[0.15em] mb-4">Statistik Penjualan</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="rounded-xl border border-white/5 bg-navy-light p-5">
+                <div class="text-xs text-muted uppercase tracking-wider mb-1">Total Pendapatan</div>
+                <div class="text-xl font-bold text-orange-accent">Rp {{ number_format($totalIdr, 0, ',', '.') }}</div>
+                <div class="text-sm text-muted mt-0.5">$ {{ number_format($totalUsd, 2, '.', ',') }}</div>
+            </div>
+
+            <div class="rounded-xl border border-white/5 bg-navy-light p-5">
+                <div class="text-xs text-muted uppercase tracking-wider mb-1">Hari Ini</div>
+                <div class="text-xl font-bold text-orange-accent">Rp {{ number_format($todayIdr, 0, ',', '.') }}</div>
+                <div class="text-sm text-muted mt-0.5">$ {{ number_format($todayUsd, 2, '.', ',') }}</div>
+            </div>
+
+            <div class="rounded-xl border border-white/5 bg-navy-light p-5">
+                <div class="text-xs text-muted uppercase tracking-wider mb-1">Bulan Ini</div>
+                <div class="text-xl font-bold text-orange-accent">Rp {{ number_format($monthIdr, 0, ',', '.') }}</div>
+                <div class="text-sm text-muted mt-0.5">$ {{ number_format($monthUsd, 2, '.', ',') }}</div>
+            </div>
+
+            <div class="rounded-xl border border-white/5 bg-navy-light p-5">
+                <div class="text-xs text-muted uppercase tracking-wider mb-1">Pesanan Sukses</div>
+                <div class="text-xl font-bold text-green-400">{{ $completedOrders }}</div>
+                <div class="text-sm text-muted mt-0.5">dari {{ $ordersCount }} total</div>
+            </div>
+        </div>
+    </div>
+
     <div class="mt-8">
         <h2 class="text-lg font-black uppercase tracking-[0.15em] mb-4">Pesanan Terbaru</h2>
         <div class="overflow-hidden rounded-xl border border-white/5 bg-navy-light">

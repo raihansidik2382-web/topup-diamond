@@ -9,14 +9,13 @@ use App\Http\Controllers\ProductController;
 use App\Models\Game;
 use App\Models\Order;
 use App\Models\Product;
+use App\Services\CurrencyService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    $games = Game::withCount(['products' => fn ($q) => $q->where('is_active', true)])
-        ->where('is_active', true)
-        ->get();
+    $games = Game::all();
 
-    return view('home', compact('games'));
+    return view('topup', compact('games'));
 })->name('home');
 
 Route::get('/games/{game:slug}', function (Game $game) {
@@ -39,9 +38,27 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
         $gamesCount = Game::count();
         $productsCount = Product::count();
         $ordersCount = Order::count();
+
+        $totalIdr = (int) Order::sum('amount');
+        $currency = App::make(CurrencyService::class);
+        $totalUsd = $currency->idrToUsd($totalIdr);
+
+        $todayIdr = (int) Order::whereDate('created_at', today())->sum('amount');
+        $todayUsd = $currency->idrToUsd($todayIdr);
+
+        $monthIdr = (int) Order::whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->sum('amount');
+        $monthUsd = $currency->idrToUsd($monthIdr);
+
+        $completedOrders = Order::where('status', 'success')->count();
+
         $recentOrders = Order::with(['game', 'product'])->latest()->take(5)->get();
 
-        return view('dashboard', compact('gamesCount', 'productsCount', 'ordersCount', 'recentOrders'));
+        return view('dashboard', compact(
+            'gamesCount', 'productsCount', 'ordersCount',
+            'totalIdr', 'totalUsd', 'todayIdr', 'todayUsd',
+            'monthIdr', 'monthUsd', 'completedOrders',
+            'recentOrders',
+        ));
     })->name('dashboard');
 
     Route::resource('games', GameController::class);
