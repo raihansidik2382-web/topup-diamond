@@ -15,7 +15,7 @@
     {{-- Slide backgrounds --}}
     @foreach ($slides as $i => $image)
         <div
-            class="slide absolute inset-0 bg-cover bg-center transition-opacity duration-700"
+            class="slide absolute inset-0 bg-cover bg-top transition-opacity duration-700"
             style="background-image: url('{{ $image }}'); {{ $i > 0 ? 'opacity: 0;' : '' }}"
         ></div>
     @endforeach
