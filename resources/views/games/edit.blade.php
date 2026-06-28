@@ -5,7 +5,7 @@
 @section('content')
     <h1 class="text-2xl font-semibold mb-6">Edit Game</h1>
 
-    <form action="{{ route('games.update', $game) }}" method="POST" class="max-w-lg">
+    <form action="{{ route('admin.games.update', $game) }}" method="POST" class="max-w-lg">
         @csrf
         @method('PUT')
 
@@ -30,7 +30,7 @@
 
         <div class="flex items-center gap-4">
             <button type="submit" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">Simpan</button>
-            <a href="{{ route('games.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Batal</a>
+            <a href="{{ route('admin.games.index') }}" class="text-sm text-gray-600 hover:text-gray-900">Batal</a>
         </div>
     </form>
 @endsection

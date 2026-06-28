@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-semibold">Daftar Game</h1>
-        <a href="{{ route('games.create') }}" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">Tambah Game</a>
+        <a href="{{ route('admin.games.create') }}" class="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500">Tambah Game</a>
     </div>
 
     <div class="overflow-hidden rounded-lg border border-gray-200 bg-white">
@@ -33,8 +33,8 @@
                             @endif
                         </td>
                         <td class="px-6 py-4 text-right">
-                            <a href="{{ route('games.edit', $game) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                            <form action="{{ route('games.destroy', $game) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Yakin ingin menghapus game ini?')">
+                            <a href="{{ route('admin.games.edit', $game) }}" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                            <form action="{{ route('admin.games.destroy', $game) }}" method="POST" class="inline ml-3" onsubmit="return confirm('Yakin ingin menghapus game ini?')">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-red-600 hover:text-red-900">Hapus</button>

@@ -9,19 +9,19 @@
         <div class="rounded-lg border border-gray-200 bg-white p-6">
             <div class="text-3xl font-bold text-indigo-600">{{ $gamesCount }}</div>
             <div class="mt-1 text-sm text-gray-500">Game</div>
-            <a href="{{ route('games.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
+            <a href="{{ route('admin.games.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
         </div>
 
         <div class="rounded-lg border border-gray-200 bg-white p-6">
             <div class="text-3xl font-bold text-indigo-600">{{ $productsCount }}</div>
             <div class="mt-1 text-sm text-gray-500">Produk Topup</div>
-            <a href="{{ route('products.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
+            <a href="{{ route('admin.products.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
         </div>
 
         <div class="rounded-lg border border-gray-200 bg-white p-6">
             <div class="text-3xl font-bold text-indigo-600">{{ $ordersCount }}</div>
             <div class="mt-1 text-sm text-gray-500">Pesanan</div>
-            <a href="{{ route('orders.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
+            <a href="{{ route('admin.orders.index') }}" class="mt-3 inline-block text-sm text-indigo-600 hover:text-indigo-900">Kelola &rarr;</a>
         </div>
     </div>
 
