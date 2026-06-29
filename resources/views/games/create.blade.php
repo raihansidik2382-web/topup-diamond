@@ -34,7 +34,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <button type="submit" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Simpan</button>
+            <button type="submit" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-navy-dark hover:bg-white/80 transition-colors">Simpan</button>
             <a href="{{ route('admin.games.index') }}" class="text-sm text-muted hover:text-[#f5f5f5]">Batal</a>
         </div>
     </form>

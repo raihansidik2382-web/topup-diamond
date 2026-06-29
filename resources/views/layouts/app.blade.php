@@ -110,7 +110,7 @@
                         </button>
                     </form>
                 @else
-                    <a href="{{ route('login') }}" class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-white bg-orange-accent rounded-lg hover:bg-orange-accent/80 transition-colors">Masuk</a>
+                    <a href="{{ route('login') }}" class="px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-navy-dark bg-orange-accent rounded-lg hover:bg-white/80 transition-colors">Masuk</a>
                 @endauth
             </div>
         </header>

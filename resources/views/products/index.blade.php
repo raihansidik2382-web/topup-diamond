@@ -5,7 +5,7 @@
 @section('content')
     <div class="flex items-center justify-between mb-6">
         <h1 class="text-2xl font-black uppercase tracking-[0.15em]">Daftar Produk</h1>
-        <a href="{{ route('admin.products.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">Tambah Produk</a>
+        <a href="{{ route('admin.products.create') }}" class="rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-navy-dark hover:bg-white/80 transition-colors">Tambah Produk</a>
     </div>
 
     <div class="overflow-hidden rounded-xl border border-white/5 bg-navy-light">

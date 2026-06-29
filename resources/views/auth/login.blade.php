@@ -38,7 +38,7 @@
                     </div>
 
                     <button type="submit"
-                        class="w-full rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-white hover:bg-orange-accent/80 transition-colors">
+                        class="w-full rounded-lg bg-orange-accent px-4 py-2 text-sm font-semibold uppercase tracking-wider text-navy-dark hover:bg-white/80 transition-colors">
                         Masuk
                     </button>
                 </form>
